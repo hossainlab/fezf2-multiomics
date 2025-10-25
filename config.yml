@@ -1,0 +1,55 @@
+project_name: "Fezf2_MultiOmics_scverse"
+paths:
+  raw: "data/raw"
+  meta: "data/metadata"
+  out: "results"
+
+patterns:
+  rna: ".*filtered_gene_bc_matrices_h5.h5$"
+  atac: ".*filtered_peak_bc_matrix.h5$"
+
+# parse tokens from filenames shown in your screenshots
+regex:
+  rna:  "(GSM\\d+)_(?<token>[A-Za-z0-9]+?)_(?<tp>E\\d+\\.?\\d*|P\\d+).*filtered_gene_bc_matrices_h5.h5"
+  atac: "(GSM\\d+)_(?<tp>E\\d+\\.?\\d*|P\\d+).*filtered_peak_bc_matrix.h5"
+
+# map filename token -> genotype & sex (extend as needed)
+condition_map:
+  Fezf2KO:   {genotype: "KO",  sex: null}
+  Fezf2KO_P1: {genotype: "KO", sex: null}
+  Fezf2Het:  {genotype: "HET", sex: null}
+  Fezf2Het_P1F: {genotype: "HET", sex: "F"}
+  Fezf2Het_P1M: {genotype: "HET", sex: "M"}
+  P1_S1:     {genotype: "WT", sex: null}
+  P1_S2:     {genotype: "WT", sex: null}
+  WT:        {genotype: "WT", sex: null}
+
+qc:
+  rna:
+    min_genes: 200
+    max_genes: 8000
+    max_mito_pct: 12
+    min_counts: 500
+  atac:
+    min_fragments: 3000
+    min_tss: 3.0
+    max_dups: 0.2
+
+integration:
+  n_hvg: 3000
+  scvi_latent: 50
+  batch_key: "sample"
+
+velocity:
+  min_shared_counts: 20
+
+deg:
+  method: "diffxpy"   # pseudobulk + NB GLM with diffxpy/statsmodels
+  covariates: ["batch","sex"]
+
+composition:
+  ref_level: "WT"
+
+species: "mmusculus"
+genome: "mm10"
+seed: 1337

@@ -309,7 +309,7 @@ This research plan leverages the comprehensive GSE153164 dataset (Di Bella et al
 **Tasks**:
 1. Load all 23 scRNA-seq samples
 2. Comprehensive quality control across all samples
-3. Batch correction and integration (Harmony, Seurat v5, scVI)
+3. Batch correction and integration (Harmony, scVI)
 4. Load and process scATAC-seq data (E13.5, E15.5, E18.5)
 5. Create integrated multi-modal objects at matched timepoints
 

@@ -1,33 +1,38 @@
-name: fezf2-scverse
-channels: [conda-forge, bioconda, defaults]
+name: scverse
+channels:
+  - nvidia
+  - conda-forge
+  - bioconda
 dependencies:
-  - python
-  - anndata
-  - scanpy
-  - scvi-tools
-  - scvelo
-  - muon
-  - episcanpy
-  - mofapy2
-  - statsmodels
-  - decoupler
-  - gseapy
-  - scCODA
-  - pyscenic
-  - leidenalg
-  - igraph
-  - pyarrow
-  - scanorama
-  - numpy 
-  - pandas 
-  - matplotlib 
-  - seaborn 
-  - plotly
-  - pyyaml
-  - tqdm
-  - graphviz
-  - pygraphviz
-  - gcc                # (Linux) for some builds; on macOS use clang (Xcode)
+  - python=3.11
   - pip
-  - pip:
-      - mudata
+
+# --- Core scverse Ecosystem ---
+  - scanpy
+  - anndata
+  - mudata
+  - spatialdata
+  - scvi-tools
+  - squidpy
+  - muon
+  - harmonypy 
+  
+  # --- Machine Learning & Deep Learning ---
+  - pytorch
+  - torchvision
+  - pytorch-lightning
+  - jax
+  - flax
+  - scikit-learn
+  - xgboost
+  
+  # --- Specialized Tools ---
+  - cellrank
+  - decoupler
+  - pertpy
+  
+  # --- Visualization & Kernel ---
+  - matplotlib
+  - seaborn
+  - jupyterlab
+  - ipykernel

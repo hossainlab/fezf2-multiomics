@@ -1,0 +1,38 @@
+name: scverse
+channels:
+  - nvidia
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - pip
+
+# --- Core scverse Ecosystem ---
+  - scanpy
+  - anndata
+  - mudata
+  - spatialdata
+  - scvi-tools
+  - squidpy
+  - muon
+  - harmonypy 
+  
+  # --- Machine Learning & Deep Learning ---
+  - pytorch
+  - torchvision
+  - pytorch-lightning
+  - jax
+  - flax
+  - scikit-learn
+  - xgboost
+  
+  # --- Specialized Tools ---
+  - cellrank
+  - decoupler
+  - pertpy
+  
+  # --- Visualization & Kernel ---
+  - matplotlib
+  - seaborn
+  - jupyterlab
+  - ipykernel

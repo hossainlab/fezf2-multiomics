@@ -1,0 +1,75 @@
+
+METHODS SECTION TEMPLATE
+========================
+
+Data Acquisition
+----------------
+We analyzed scRNA-seq and scATAC-seq data from the GSE153164 dataset (Di Bella et al., 2021),
+comprising 23 scRNA-seq samples across developmental stages E10-P4 with wild-type (WT),
+Fezf2 heterozygous (Het), and Fezf2 knockout (KO) genotypes, and 3 scATAC-seq samples
+(E13.5, E15.5, E18.5 WT).
+
+scRNA-seq Data Processing
+--------------------------
+- Quality control: Cells with <200 or >6000 genes, or >20% mitochondrial content were excluded
+- Normalization: Counts normalized to 10,000 per cell and log-transformed
+- Batch correction: Harmony (Korsunsky et al., 2019) for sample integration
+- Dimensionality reduction: PCA (50 components), UMAP
+- Clustering: Leiden algorithm at multiple resolutions (0.3-1.5)
+- Tools: scanpy v{sc.__version__} (Wolf et al., 2018)
+
+Cell Type Annotation
+--------------------
+Cell types were annotated using:
+1. Marker gene scoring for known cortical cell types
+2. Differential expression analysis (Wilcoxon rank-sum test)
+3. Manual curation based on literature-defined markers
+
+Trajectory Analysis
+-------------------
+- PAGA (Wolf et al., 2019) for lineage graph abstraction
+- Diffusion pseudotime for developmental ordering
+- RNA velocity (scVelo, if applicable) for directional dynamics
+
+Dose-Response Analysis
+----------------------
+Genes were classified into dose-response patterns (Linear, Compensatory, Threshold, Synergistic)
+based on WT→Het→KO expression trends using:
+- Spearman correlation with Fezf2 dosage
+- Additivity deviation metrics
+- Fold-change thresholds (|FC| > 0.5)
+
+Gene Regulatory Network Analysis
+---------------------------------
+- TF-target correlations computed using Pearson/Spearman coefficients
+- Network construction for {len(available_tfs) if 'available_tfs' in locals() else 'N/A'} transcription factors
+- Multi-omics integration of RNA-seq and ATAC-seq data
+
+Therapeutic Target Prioritization
+----------------------------------
+Multi-criteria scoring based on:
+1. Compensatory upregulation in Het/KO
+2. Druggability (DGIdb database queries)
+3. Fezf2 network proximity
+4. Effect size magnitude
+5. Machine learning ranking (Gradient Boosting)
+
+Statistical Analysis
+--------------------
+- Differential expression: Wilcoxon rank-sum test
+- Multiple testing correction: Benjamini-Hochberg FDR
+- Compositional analysis: Fisher's exact test
+- Significance threshold: FDR < 0.05
+
+Software and Reproducibility
+-----------------------------
+- Python {np.__version__}
+- scanpy {sc.__version__}
+- pandas {pd.__version__}
+- All analysis code available at: [GitHub repository URL]
+- Random seed: 42 for reproducibility
+
+Data Availability
+-----------------
+Raw data: GEO accession GSE153164
+Processed data and code: Available upon publication

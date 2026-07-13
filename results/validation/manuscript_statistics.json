@@ -1,0 +1,17 @@
+{
+  "Dataset Statistics": {
+    "Total cells analyzed": "121,869",
+    "Total genes": "3,000",
+    "scRNA-seq samples": "23",
+    "scATAC-seq samples": "3",
+    "Developmental stages": "13 (E10-P4)",
+    "Genotypes": "3 (WT, Het, KO)"
+  },
+  "Cell Type Analysis": {
+    "Cell types identified": 14,
+    "Marker genes validated": "20+",
+    "Clustering resolutions tested": "5"
+  },
+  "Dose-Response Analysis": {
+    "Genes with dose-response data": 3000,
+    "Compensatory genes": 
